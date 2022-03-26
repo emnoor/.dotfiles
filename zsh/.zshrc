@@ -10,7 +10,7 @@ source /etc/profile.d/vte.sh
 
 # oh-my-zsh
 export DEFAULT_USER="enam"
-export ZSH="/home/enam/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME=""
 # DISABLE_AUTO_UPDATE="true"
 export UPDATE_ZSH_DAYS=15
@@ -59,4 +59,4 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 # autoload -U bashcompinit
 # bashcompinit
 eval "$(register-python-argcomplete pipx)"
-export PATH="$PATH:/home/enam/.nsccli/bin"
+export PATH="$PATH:$HOME/.nsccli/bin"
