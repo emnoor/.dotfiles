@@ -1,0 +1,16 @@
+[user]
+	name = Enam Mijbah Noor
+	email = enammijbahnoor@gmail.com
+[code]
+	editor = vim
+[alias]
+	co = checkout
+	br = branch
+	st = status
+	last = log -1 HEAD
+[credential]
+	helper = store
+[pager]
+	branch = false
+[init]
+	defaultBranch = main
