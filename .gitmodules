@@ -1,3 +1,6 @@
 [submodule "tmux/.tmux/tmux-statusline-themes"]
 	path = tmux/.tmux/tmux-statusline-themes
 	url = https://github.com/dmitry-kabanov/tmux-statusline-themes
+[submodule "zsh/.oh-my-zsh"]
+	path = zsh/.oh-my-zsh
+	url = https://github.com/ohmyzsh/ohmyzsh.git

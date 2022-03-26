@@ -1,0 +1,25 @@
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=10000
+SAVEHIST=100000
+setopt appendhistory autocd
+bindkey -e
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/home/enam/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+setopt noclobber
+
+bindkey "^[[1;5D"   backward-word
+bindkey "^[[1;5C"   forward-word
+bindkey "^[[H"      beginning-of-line
+bindkey "^[[F"      end-of-line
+bindkey "^[[3~"     delete-char
+
+fpath+=$HOME/.zsh/pure
+autoload -U promptinit; promptinit
+prompt pure
