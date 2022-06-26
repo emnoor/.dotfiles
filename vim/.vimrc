@@ -61,7 +61,16 @@ call plug#end()
 
 
 " coc.nvim extensions
-let g:coc_global_extensions = ['coc-pyright', 'coc-go', 'coc-rust-analyzer', 'coc-tsserver', 'coc-json', 'coc-html']
+let g:coc_global_extensions = [
+    \"coc-pyright",
+    \"coc-go",
+    \"coc-rust-analyzer",
+    \"coc-sh",
+    \"coc-html",
+    \"coc-css",
+    \"coc-tsserver",
+    \"coc-json",
+    \]
 
 if has('nvim')
     " set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
