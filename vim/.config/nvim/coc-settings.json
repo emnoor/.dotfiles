@@ -1,0 +1,11 @@
+{
+    "rust-analyzer.inlayHints.enable": false,
+    "coc.preferences.formatOnSaveFiletypes": ["elm"],
+    "languageserver": {
+        "elmLS": {
+            "command": "elm-language-server",
+            "filetypes": ["elm"],
+            "rootPatterns": ["elm.json"]
+        }
+    }
+}
