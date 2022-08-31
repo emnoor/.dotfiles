@@ -8,16 +8,14 @@ autoload -Uz run-help
 alias help=run-help
 
 # open new tabs in the same directory
-if [ -e /etc/profile.d/vte.sh ]; then
-    source /etc/profile.d/vte.sh
-fi
+[[ -e /etc/profile.d/vte.sh ]] && source /etc/profile.d/vte.sh
 
 # oh-my-zsh
 export DEFAULT_USER="enam"
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME=""
 DISABLE_AUTO_UPDATE="true"
-export UPDATE_ZSH_DAYS=15
+# export UPDATE_ZSH_DAYS=15
 DISABLE_MAGIC_FUNCTIONS=true
 # DISABLE_LS_COLORS="true"
 # DISABLE_AUTO_TITLE="true"
@@ -35,13 +33,8 @@ else
   export EDITOR='nvim'
 fi
 
-# source local alias file
-if [ -e $HOME/.alias ]; then
-    source $HOME/.alias
-fi
-
+[[ -e $HOME/.alias ]] && source $HOME/.alias
 export LESS="-R --mouse --wheel-lines 3"
-
 path=(
     $HOME/.local/bin
     $HOME/.cargo/bin
@@ -51,16 +44,6 @@ path=(
     $HOME/.local/share/JetBrains/Toolbox/scripts
 )
 export PATH
-
-# load plugins
-ZSH_SYNTAX_ARCH=/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-ZSH_SYNTAX_UBUNTU=/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-if [ -e $ZSH_SYNTAX_ARCH ]; then
-    source $ZSH_SYNTAX_ARCH
-fi
-if [ -e $ZSH_SYNTAX_UBUNTU ]; then
-    source $ZSH_SYNTAX_UBUNTU
-fi
 
 # enable pipx auto-completion
 # autoload -U bashcompinit
