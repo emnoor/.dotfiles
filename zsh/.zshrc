@@ -32,6 +32,7 @@ if [[ -n $SSH_CONNECTION ]]; then
 else
   export EDITOR='nvim'
 fi
+export VISUAL="$EDITOR"
 
 [[ -e $HOME/.alias ]] && source $HOME/.alias
 export LESS="-R --mouse --wheel-lines 3"
@@ -49,5 +50,8 @@ export PATH
 # autoload -U bashcompinit
 # bashcompinit
 # eval "$(register-python-argcomplete pipx)"
+
+# THIS SHOULD BE THE LAST LINE !!
+source $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 
 # zprof
