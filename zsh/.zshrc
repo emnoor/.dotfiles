@@ -53,7 +53,14 @@ path=(
 export PATH
 
 # load plugins
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+ZSH_SYNTAX_ARCH=/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+ZSH_SYNTAX_UBUNTU=/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [ -e $ZSH_SYNTAX_ARCH ]; then
+    source $ZSH_SYNTAX_ARCH
+fi
+if [ -e $ZSH_SYNTAX_UBUNTU ]; then
+    source $ZSH_SYNTAX_UBUNTU
+fi
 
 # enable pipx auto-completion
 # autoload -U bashcompinit
