@@ -6,7 +6,10 @@
 [alias]
 	co = checkout
 	br = branch
+	c = commit
 	st = status
+	unstage = restore --staged
+	unstage2 = reset HEAD --
 	last = log -1 HEAD
 [credential]
 	helper = store
@@ -14,3 +17,11 @@
 	branch = false
 [init]
 	defaultBranch = main
+[core]
+	autocrlf = input
+[merge]
+    tool = meld
+[mergetool "meld"]
+    # Choose one of these 2 lines (not both!)
+    cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
+    # cmd = meld "$LOCAL" "$BASE" "$REMOTE" --output "$MERGED"
