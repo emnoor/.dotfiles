@@ -1,6 +1,8 @@
 # zmodload zsh/zprof
 
-set noclobber
+set -o noclobber
+alias cp='cp -i'
+alias mv='mv -i'
 
 # unset run-help alias to man, and enable run-help
 autoload -Uz run-help
