@@ -29,6 +29,10 @@ Plug 'itchyny/lightline.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'andymass/vim-matchup'
 
+" sticky scroll
+" Plug 'nvim-treesitter/nvim-treesitter'
+" Plug 'nvim-treesitter/nvim-treesitter-context'
+
 " Fuzzy finder
 Plug 'airblade/vim-rooter'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -292,7 +296,7 @@ endif
 " # Keyboard shortcuts
 " ==============================================================================
 " shitty shift
-nnoremap ; :
+"nnoremap ; :
 command! Q q
 command! W w
 

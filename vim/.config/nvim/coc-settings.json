@@ -1,6 +1,5 @@
 {
-    "suggest.noselect": true,
-    "rust-analyzer.inlayHints.enable": false,
+    "inlayHint.enable": false,
     "coc.preferences.formatOnSaveFiletypes": ["elm"],
     "languageserver": {
         "elmLS": {
