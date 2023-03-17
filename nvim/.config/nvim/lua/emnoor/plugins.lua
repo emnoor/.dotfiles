@@ -104,4 +104,5 @@ require('lazy').setup({
   --'justinmk/vim-sneak',
   --'andymass/vim-matchup',
   --'godlygeek/tabular',
+  'godlygeek/tabular',
 }, {})
