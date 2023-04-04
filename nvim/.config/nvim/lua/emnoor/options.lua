@@ -4,6 +4,8 @@ vim.o.incsearch = true
 vim.wo.number = true
 vim.wo.relativenumber = true
 
+vim.o.cursorline = true
+
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
