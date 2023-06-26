@@ -15,6 +15,19 @@ require('lazy').setup({
   -- Git related plugins
   'tpope/vim-fugitive',
   --'tpope/vim-rhubarb',
+  { -- Adds git releated signs to the gutter, as well as utilities for managing changes
+    'lewis6991/gitsigns.nvim',
+    opts = {
+      signs = {
+        add = { text = '+' },
+        change = { text = '~' },
+        delete = { text = '_' },
+        topdelete = { text = '‾' },
+        changedelete = { text = '~' },
+      },
+    },
+  },
+
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
@@ -36,19 +49,6 @@ require('lazy').setup({
 
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim', opts = {} },
-
-  { -- Adds git releated signs to the gutter, as well as utilities for managing changes
-    'lewis6991/gitsigns.nvim',
-    opts = {
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
-    },
-  },
 
   { -- Theme inspired by Atom
     'navarasu/onedark.nvim',
@@ -106,6 +106,8 @@ require('lazy').setup({
     -- Optional dependencies
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
+
+  'christoomey/vim-tmux-navigator',
 
   --{ 'windwp/nvim-autopairs', opts = {} },
   --'justinmk/vim-sneak',
