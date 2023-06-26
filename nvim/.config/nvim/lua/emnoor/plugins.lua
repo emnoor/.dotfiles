@@ -100,6 +100,13 @@ require('lazy').setup({
     end,
   },
 
+  {
+    'stevearc/oil.nvim',
+    opts = {},
+    -- Optional dependencies
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
+
   --{ 'windwp/nvim-autopairs', opts = {} },
   --'justinmk/vim-sneak',
   --'andymass/vim-matchup',
