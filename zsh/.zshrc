@@ -36,17 +36,12 @@ else
 fi
 export VISUAL="$EDITOR"
 
-export PYENV_ROOT="$HOME/.pyenv"
-export WASMTIME_HOME="$HOME/.wasmtime"
-
 [[ -e $HOME/.alias ]] && source $HOME/.alias
 export LESS="-R --mouse --wheel-lines 3"
 path=(
     $HOME/.local/bin
-    $PYENV_ROOT/bin
     $HOME/.cargo/bin
     $HOME/go/bin
-    $WASMTIME_HOME/bin
     $path
     $HOME/.nsccli/bin
     $HOME/.local/share/JetBrains/Toolbox/scripts
@@ -57,12 +52,6 @@ export PATH
 # autoload -U bashcompinit
 # bashcompinit
 # eval "$(register-python-argcomplete pipx)"
-
-eval "$(pyenv init -)"
-
-function reveal-md() {
-    docker run --rm -p 1948:1948 -p 35729:35729 -v $PWD:/slides webpronl/reveal-md:latest /slides --watch
-}
 
 # THIS SHOULD BE THE LAST LINE !!
 source $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
