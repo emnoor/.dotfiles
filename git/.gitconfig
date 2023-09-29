@@ -1,27 +1,33 @@
 [user]
-	name = Enam Mijbah Noor
-	email = enammijbahnoor@gmail.com
+    name = Enam Mijbah Noor
+    email = enammijbahnoor@gmail.com
 [code]
-	editor = vim
+    editor = vim
 [alias]
-	co = checkout
-	br = branch
-	c = commit
-	st = status
-	unstage = restore --staged
-	unstage2 = reset HEAD --
-	last = log -1 HEAD
+    br = branch
+    ci = commit
+    co = checkout
+    ff = merge --ff-only
+    last = log -1 HEAD
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    lga = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --all
+    ls = ls-files
+    pullff = pull --ff-only --prune
+    st = status
+    unstage = restore --staged
+    unstage2 = reset HEAD --
+    who = shortlog -s --
 [credential]
-	helper = store
+    helper = store
 [pager]
-	branch = false
+    branch = false
 [init]
-	defaultBranch = main
+    defaultBranch = main
 [core]
-	autocrlf = input
+    autocrlf = input
 [merge]
     tool = meld
 [mergetool "meld"]
-    # Choose one of these 2 lines (not both!)
+    # Choose one of these
     cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
     # cmd = meld "$LOCAL" "$BASE" "$REMOTE" --output "$MERGED"
