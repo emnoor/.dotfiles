@@ -53,6 +53,9 @@ export PATH
 # eval "$(register-python-argcomplete pipx)"
 
 # THIS SHOULD BE THE LAST LINE !!
-source $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+# Don't enable z-sy-h on wsl, as it is VERY slow
+if ! [[ -v WSL_DISTRO_NAME ]]; then
+  source $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+fi
 
 # zprof
