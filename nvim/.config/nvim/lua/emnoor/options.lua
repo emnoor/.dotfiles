@@ -25,7 +25,7 @@ vim.o.undofile = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
-vim.opt.scrolloff = 4
+vim.opt.scrolloff = 8
 vim.opt.signcolumn = 'yes'
 -- vim.wo.signcolumn = 'yes'
 
