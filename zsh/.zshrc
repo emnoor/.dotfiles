@@ -36,7 +36,6 @@ else
 fi
 export VISUAL="$EDITOR"
 
-[[ -e $HOME/.alias ]] && source $HOME/.alias
 export LESS="-R --mouse --wheel-lines 3"
 path=(
     $HOME/.local/bin
