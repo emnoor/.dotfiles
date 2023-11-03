@@ -22,7 +22,7 @@ DISABLE_MAGIC_FUNCTIONS=true
 # DISABLE_LS_COLORS="true"
 # DISABLE_AUTO_TITLE="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
-plugins=(httpie poetry rust) # ripgrep
+plugins=()
 source $ZSH/oh-my-zsh.sh
 # /oh-my-zsh
 
