@@ -13,16 +13,12 @@ alias help=run-help
 [[ -e /etc/profile.d/vte.sh ]] && source /etc/profile.d/vte.sh
 
 # oh-my-zsh
-export DEFAULT_USER="enam"
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME=""
-DISABLE_AUTO_UPDATE="true"
-# export UPDATE_ZSH_DAYS=15
+zstyle ':omz:update' mode disabled
+CASE_SENSITIVE=true
 DISABLE_MAGIC_FUNCTIONS=true
-# DISABLE_LS_COLORS="true"
-# DISABLE_AUTO_TITLE="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
-plugins=()
+HIST_STAMPS="yyyy-mm-dd"
 source $ZSH/oh-my-zsh.sh
 # /oh-my-zsh
 
