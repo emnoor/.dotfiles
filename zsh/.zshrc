@@ -48,6 +48,11 @@ export PATH
 # bashcompinit
 # eval "$(register-python-argcomplete pipx)"
 
+if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ]
+then
+  source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
+fi
+
 # THIS SHOULD BE THE LAST LINE !!
 # Don't enable z-sy-h on wsl, as it is VERY slow
 if ! [[ -v WSL_DISTRO_NAME ]]; then
