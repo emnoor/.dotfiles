@@ -15,18 +15,6 @@ require('lazy').setup({
   -- Git related plugins
   'tpope/vim-fugitive',
   --'tpope/vim-rhubarb',
-  -- { -- Adds git releated signs to the gutter, as well as utilities for managing changes
-  --   'lewis6991/gitsigns.nvim',
-  --   opts = {
-  --     signs = {
-  --       add = { text = '+' },
-  --       change = { text = '~' },
-  --       delete = { text = '_' },
-  --       topdelete = { text = '‾' },
-  --       changedelete = { text = '~' },
-  --     },
-  --   },
-  -- },
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
@@ -43,7 +31,11 @@ require('lazy').setup({
 
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
-    dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
+    dependencies = {
+      'hrsh7th/cmp-nvim-lsp',
+      'L3MON4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip'
+    },
   },
 
   -- Useful plugin to show you pending keybinds.
@@ -77,7 +69,11 @@ require('lazy').setup({
 
   { 'numToStr/Comment.nvim', opts = {} },
 
-  { 'nvim-telescope/telescope.nvim', version = '*', dependencies = { 'nvim-lua/plenary.nvim' } },
+  {
+    'nvim-telescope/telescope.nvim',
+    version = '*',
+    dependencies = { 'nvim-lua/plenary.nvim' }
+  },
 
   {
     'nvim-telescope/telescope-fzf-native.nvim',
@@ -106,9 +102,5 @@ require('lazy').setup({
 
   'christoomey/vim-tmux-navigator',
 
-  --{ 'windwp/nvim-autopairs', opts = {} },
-  --'justinmk/vim-sneak',
-  --'andymass/vim-matchup',
-  --'godlygeek/tabular',
   'godlygeek/tabular',
 }, {})
