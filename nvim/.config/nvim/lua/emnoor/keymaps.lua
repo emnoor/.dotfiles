@@ -20,29 +20,17 @@ vim.keymap.set("n", "N", "Nzzzv")
 -- greatest remap ever
 -- vim.keymap.set("x", "<leader>p", [["_dP]])
 
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], {
-  desc = "Yank into system clipboard"
-})
-vim.keymap.set("n", "<leader>Y", [["+Y]], {
-  desc = "Yank current line into system clipboard"
-})
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank into system clipboard" })
+vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Yank current line into system clipboard" })
 
 vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "Q", "<nop>")
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, {
-  desc = "Go to previous diagnostic message"
-})
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, {
-  desc = "Go to next diagnostic message"
-})
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, {
-  desc = "Open floating diagnostic message"
-})
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, {
-  desc = "Open diagnostics list"
-})
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
 -- quicklist keymaps
 -- vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")

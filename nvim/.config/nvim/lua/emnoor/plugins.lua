@@ -12,17 +12,57 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-  -- Git related plugins
   {
-    'tpope/vim-fugitive',
+    'tpope/vim-fugitive', -- everything git
     config = function()
       vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
     end
   },
-  --'tpope/vim-rhubarb',
+  --'tpope/vim-rhubarb', -- everything github
+  -- { 'lewis6991/gitsigns.nvim', opts = {} },
+  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  'christoomey/vim-tmux-navigator',
+  'godlygeek/tabular',
+  { 'laytan/cloak.nvim', opts = {} },
+  -- 'mbbill/undotree',
+  { 'folke/which-key.nvim',  opts = {} },
+  { 'numToStr/Comment.nvim', opts = {} },
 
-  -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-sleuth',
+  {
+    'stevearc/oil.nvim',
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      local oil = require("oil")
+      oil.setup()
+      vim.keymap.set("n", "-", oil.open, { desc = "Open parent directory" })
+    end,
+  },
+
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = { signs = false },
+  },
+
+  { -- Theme inspired by Atom
+    'navarasu/onedark.nvim',
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme 'onedark'
+    end,
+  },
+
+  { -- Set lualine as statusline
+    'nvim-lualine/lualine.nvim',
+    opts = {
+      options = {
+        icons_enabled = false,
+        theme = 'onedark',
+        component_separators = '|',
+        section_separators = '',
+      },
+    },
+  },
 
   { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
@@ -30,8 +70,9 @@ require('lazy').setup({
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
       { 'j-hui/fidget.nvim', opts = {} },
-      'folke/neodev.nvim',
+      { 'folke/neodev.nvim', opts = {} },
     },
+    -- TODO: move LSP config from after directory to here
   },
 
   { -- Autocompletion
@@ -87,31 +128,6 @@ require('lazy').setup({
       }
     end,
   },
-
-  -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',  opts = {} },
-
-  { -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'onedark'
-    end,
-  },
-
-  { -- Set lualine as statusline
-    'nvim-lualine/lualine.nvim',
-    opts = {
-      options = {
-        icons_enabled = false,
-        theme = 'onedark',
-        component_separators = '|',
-        section_separators = '',
-      },
-    },
-  },
-
-  { 'numToStr/Comment.nvim', opts = {} },
 
   {
     'nvim-telescope/telescope.nvim',
@@ -169,14 +185,11 @@ require('lazy').setup({
       require('nvim-treesitter.configs').setup {
         modules = {},
         sync_install = false,
-        ignore_install = {},
-
         ensure_installed = { 'go', 'lua', 'python', 'rust', 'vimdoc', 'vim' },
+        ignore_install = {},
         auto_install = true,
 
         highlight = { enable = true },
-
-        indent = { enable = true, disable = { 'python' } },
 
         incremental_selection = {
           enable = true,
@@ -187,6 +200,8 @@ require('lazy').setup({
             node_decremental = '<M-space>',
           },
         },
+
+        indent = { enable = true, disable = { 'python' } },
 
         textobjects = {
           select = {
@@ -235,31 +250,8 @@ require('lazy').setup({
           },
 
         },
+
       }
     end,
   },
-
-  {
-    'stevearc/oil.nvim',
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-      local oil = require("oil")
-      oil.setup()
-      vim.keymap.set("n", "-", oil.open, { desc = "Open parent directory" })
-    end,
-  },
-
-  'christoomey/vim-tmux-navigator',
-
-  'godlygeek/tabular',
-
-  { 'laytan/cloak.nvim', opts = {} },
-
-  {
-    "folke/todo-comments.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    opts = { signs = false },
-  },
-
-  -- 'mbbill/undotree',
 }, {})
