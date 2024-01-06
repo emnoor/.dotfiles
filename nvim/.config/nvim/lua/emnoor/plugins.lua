@@ -20,11 +20,12 @@ require('lazy').setup({
   },
   --'tpope/vim-rhubarb', -- everything github
   -- { 'lewis6991/gitsigns.nvim', opts = {} },
+
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   'christoomey/vim-tmux-navigator',
   'godlygeek/tabular',
-  { 'laytan/cloak.nvim', opts = {} },
   -- 'mbbill/undotree',
+  { 'laytan/cloak.nvim',     opts = {} },
   { 'folke/which-key.nvim',  opts = {} },
   { 'numToStr/Comment.nvim', opts = {} },
 
@@ -32,9 +33,8 @@ require('lazy').setup({
     'stevearc/oil.nvim',
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-      local oil = require("oil")
-      oil.setup()
-      vim.keymap.set("n", "-", oil.open, { desc = "Open parent directory" })
+      require('oil').setup()
+      vim.keymap.set("n", "-", require('oil').open, { desc = "Open parent directory" })
     end,
   },
 
@@ -80,7 +80,7 @@ require('lazy').setup({
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       'L3MON4D3/LuaSnip',
-      'saadparwaiz1/cmp_luasnip'
+      'saadparwaiz1/cmp_luasnip',
     },
     config = function()
       local cmp = require 'cmp'
@@ -254,4 +254,22 @@ require('lazy').setup({
       }
     end,
   },
+
+  -- {
+  --   'nvim-treesitter/nvim-treesitter-context',
+  --   dependencies = { 'nvim-treesitter/nvim-treesitter' },
+  --   opts = {
+  --     enable = true,
+  --     max_lines = 4,
+  --     min_window_height = 20,
+  --     line_numbers = true,
+  --     multiline_threshold = 20, -- Maximum number of lines to show for a single context
+  --     trim_scope = 'innter', -- Choices: 'inner', 'outer'
+  --     mode = 'cursor',  -- Choices: 'cursor', 'topline'
+  --     separator = nil,
+  --     zindex = 20,
+  --     on_attach = nil,
+  --   },
+  -- },
+
 }, {})
