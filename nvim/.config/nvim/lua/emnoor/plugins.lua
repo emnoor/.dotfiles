@@ -202,6 +202,7 @@ require('lazy').setup({
               ['ic'] = '@class.inner',
             },
           },
+
           move = {
             enable = true,
             set_jumps = true, -- whether to set jumps in the jumplist
@@ -222,6 +223,7 @@ require('lazy').setup({
               ['[]'] = '@class.outer',
             },
           },
+
           swap = {
             enable = true,
             swap_next = {
@@ -231,6 +233,7 @@ require('lazy').setup({
               ['<leader>A'] = '@parameter.inner',
             },
           },
+
         },
       }
     end,
@@ -249,4 +252,14 @@ require('lazy').setup({
   'christoomey/vim-tmux-navigator',
 
   'godlygeek/tabular',
+
+  { 'laytan/cloak.nvim', opts = {} },
+
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = { signs = false },
+  },
+
+  -- 'mbbill/undotree',
 }, {})
