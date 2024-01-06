@@ -24,6 +24,7 @@ require('lazy').setup({
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   'christoomey/vim-tmux-navigator',
   'godlygeek/tabular',
+  'eandrju/cellular-automaton.nvim',
   -- 'mbbill/undotree',
   { 'laytan/cloak.nvim',     opts = {} },
   { 'folke/which-key.nvim',  opts = {} },
