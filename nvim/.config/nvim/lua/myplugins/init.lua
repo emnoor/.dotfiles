@@ -21,7 +21,15 @@ return {
     'stevearc/oil.nvim',
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-      require('oil').setup()
+      require('oil').setup({
+        columns = {},
+        view_options = {
+          show_hidden = true,
+          is_always_hidden = function (name, bufnr)
+            return vim.endswith(name, "venv")
+          end,
+        },
+      })
       vim.keymap.set("n", "-", require('oil').open, { desc = "Open parent directory" })
     end,
   },
