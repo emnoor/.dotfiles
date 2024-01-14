@@ -16,7 +16,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup('myplugins')
+require('lazy').setup('myplugins', { change_detection = { enabled = false } })
 
 
 --[[ Options ]]
