@@ -40,12 +40,22 @@ return {
     opts = { signs = false },
   },
 
-  { -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
+  -- { -- Theme inspired by Atom
+  --   'navarasu/onedark.nvim',
+  --   priority = 1000,
+  --   config = function()
+  --     vim.cmd.colorscheme 'onedark'
+  --   end,
+  -- },
+
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'onedark'
-    end,
+      require('tokyonight').setup({ style = "night" })
+      vim.cmd.colorscheme 'tokyonight'
+    end
   },
 
   { -- Set lualine as statusline
@@ -53,10 +63,24 @@ return {
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'onedark',
+        theme = 'tokyonight',
         component_separators = '|',
         section_separators = '',
       },
     },
   },
+
+  { -- winbar (top breadcrumbs like thingy)
+    "utilyre/barbecue.nvim",
+    name = "barbecue",
+    version = "*",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons", -- optional dependency
+    },
+    opts = {
+      theme = 'tokyonight',
+    },
+  },
+
 }
