@@ -51,10 +51,11 @@ then
   source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
 fi
 
-# THIS SHOULD BE THE LAST LINE !!
-# Don't enable z-sy-h on wsl, as it is VERY slow
-if ! [[ -v WSL_DISTRO_NAME ]]; then
-  source $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+if [ -f "$HOME/.zshrc.user" ]
+then
+  source "$HOME/.zshrc.user"
 fi
+
+source virtualenvwrapper.sh
 
 # zprof
