@@ -38,8 +38,6 @@ path=(
     $HOME/.cargo/bin
     $HOME/go/bin
     $path
-    $HOME/.nsccli/bin
-    $HOME/.local/share/JetBrains/Toolbox/scripts
 )
 export PATH
 
