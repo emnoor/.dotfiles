@@ -41,6 +41,8 @@ path=(
 )
 export PATH
 
+export HOMEBREW_BUNDLE_FILE="$HOME/.dotfiles/Brewfile"
+
 # enable pipx auto-completion
 # autoload -U bashcompinit
 # bashcompinit
