@@ -34,11 +34,11 @@ return {
     end,
   },
 
-  {
-    "folke/todo-comments.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    opts = { signs = false },
-  },
+  -- {
+  --   "folke/todo-comments.nvim",
+  --   dependencies = { "nvim-lua/plenary.nvim" },
+  --   opts = { signs = false },
+  -- },
 
   -- { -- Theme inspired by Atom
   --   'navarasu/onedark.nvim',
@@ -70,17 +70,17 @@ return {
     },
   },
 
-  { -- winbar (top breadcrumbs like thingy)
-    "utilyre/barbecue.nvim",
-    name = "barbecue",
-    version = "*",
-    dependencies = {
-      "SmiteshP/nvim-navic",
-      "nvim-tree/nvim-web-devicons", -- optional dependency
-    },
-    opts = {
-      theme = 'tokyonight',
-    },
-  },
+  -- { -- winbar (top breadcrumbs like thingy)
+  --   "utilyre/barbecue.nvim",
+  --   name = "barbecue",
+  --   version = "*",
+  --   dependencies = {
+  --     "SmiteshP/nvim-navic",
+  --     "nvim-tree/nvim-web-devicons", -- optional dependency
+  --   },
+  --   opts = {
+  --     theme = 'tokyonight',
+  --   },
+  -- },
 
 }
