@@ -43,21 +43,21 @@ export PATH
 
 export HOMEBREW_BUNDLE_FILE="$HOME/.dotfiles/Brewfile"
 
-# enable pipx auto-completion
-# autoload -U bashcompinit
-# bashcompinit
-# eval "$(register-python-argcomplete pipx)"
+files_to_source=(
+  "$HOME/.zshrc.user" 
+  "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh   # fzf mac
+  /usr/share/doc/fzf/examples/key-bindings.zsh      # fzf ubuntu
+  /usr/share/doc/fzf/examples/completion.zsh        # fzf ubuntu
+  virtualenvwrapper.sh                                # virtualenvwrapper mac
+  /usr/share/virtualenvwrapper/virtualenvwrapper.sh   # virtualenvwrapper ubuntu
+)
 
-if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ]
-then
-  source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
-fi
-
-if [ -f "$HOME/.zshrc.user" ]
-then
-  source "$HOME/.zshrc.user"
-fi
-
-source virtualenvwrapper.sh
+for file_to_source in $files_to_source
+do
+  if [ -f "$file_to_source" ]
+  then
+    source "$file_to_source"
+  fi
+done
 
 # zprof
