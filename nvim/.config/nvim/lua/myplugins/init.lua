@@ -16,6 +16,7 @@ return {
   { 'laytan/cloak.nvim',     opts = {} },
   { 'folke/which-key.nvim',  opts = {} },
   { 'numToStr/Comment.nvim', opts = {} },
+  { 'tpope/vim-surround' },
 
   {
     'stevearc/oil.nvim',
