@@ -17,6 +17,7 @@
     unstage = restore --staged
     unstage2 = reset HEAD --
     who = shortlog -s --
+    root = rev-parse --show-toplevel
 [credential]
     helper = store
 [pager]
