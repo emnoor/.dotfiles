@@ -1,33 +1,23 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
---[[ Plugins ]]
-
-local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system {
-    'git',
-    'clone',
-    '--filter=blob:none',
-    'https://github.com/folke/lazy.nvim.git',
-    '--branch=stable',
-    lazypath,
-  }
-end
-vim.opt.rtp:prepend(lazypath)
-
-require('lazy').setup('myplugins', { change_detection = { enabled = false } })
-
 
 --[[ Options ]]
 
-vim.o.hlsearch = false
-vim.o.incsearch = true
+vim.opt.hlsearch = true
+vim.opt.incsearch = true
+vim.opt.inccommand = 'split'
 
-vim.wo.number = true
-vim.wo.relativenumber = true
+vim.opt.number = true
+vim.opt.relativenumber = true
 
-vim.o.cursorline = true
+vim.opt.cursorline = true
+
+vim.opt.showmode = false
+vim.opt.breakindent = true
+
+vim.opt.splitright = true
+vim.opt.splitbelow = true
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -37,37 +27,41 @@ vim.opt.smartindent = true
 
 vim.opt.wrap = false
 
-vim.o.mouse = 'a'
+vim.opt.mouse = 'a'
 
-vim.o.breakindent = true
+vim.opt.breakindent = true
 
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.o.undofile = true
+vim.opt.undofile = true
 
-vim.o.ignorecase = true
-vim.o.smartcase = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = 'yes'
--- vim.wo.signcolumn = 'yes'
 
-vim.o.updatetime = 100
-vim.o.timeout = true
-vim.o.timeoutlen = 300
+vim.opt.updatetime = 100
+vim.opt.timeout = true
+vim.opt.timeoutlen = 300
 
-vim.o.completeopt = 'menuone,noselect'
+vim.opt.completeopt = { "menuone", "noselect" }
 
-vim.o.termguicolors = true
+vim.opt.termguicolors = true
+
+vim.opt.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 
 --[[ Keymaps ]]
+
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 vim.keymap.set("n", "<space><space>", "<c-^>", { desc = "Toggle to the most recent buffer" })
 
--- Remap for dealing with word wrap
+-- move between wrapped lines as if they were separate lines
 -- vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 -- vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
@@ -94,24 +88,37 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "Q", "<nop>")
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
-
--- quicklist keymaps
--- vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
--- vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
--- vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
--- vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 
--- highlight on yank
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+-- [[ Basic Autocommands ]]
+
+-- Highlight when yanking text
 vim.api.nvim_create_autocmd('TextYankPost', {
-  group = highlight_group,
-  pattern = '*',
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
   callback = function()
     vim.highlight.on_yank()
   end,
 })
+
+
+--[[ Plugins ]]
+
+local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system {
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable',
+    lazypath,
+  }
+end
+vim.opt.rtp:prepend(lazypath)
+
+require('lazy').setup('myplugins', { change_detection = { enabled = false } })
