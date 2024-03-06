@@ -20,12 +20,11 @@
     root = rev-parse --show-toplevel
 [credential]
     helper = store
-[pager]
-    branch = false
 [init]
     defaultBranch = main
 [core]
     autocrlf = input
+    pager = less -F
 [merge]
     tool = meld
 [mergetool "meld"]
