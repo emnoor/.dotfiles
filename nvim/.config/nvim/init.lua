@@ -123,7 +123,18 @@ require('lazy').setup {
 
   { -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
-    opts = { options = { theme = 'tokyonight' } }
+    opts = {
+      options = {
+        theme = 'tokyonight',
+        icons_enabled = false,
+        component_separators = '|',
+        section_separators = '',
+      },
+      sections = {
+        lualine_b = {'diagnostics'},
+        lualine_y = {},
+      },
+    },
   },
 
   { -- Show you pending keybinds
