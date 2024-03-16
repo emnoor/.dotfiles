@@ -31,8 +31,6 @@
     # Choose one of these
     cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
     # cmd = meld "$LOCAL" "$BASE" "$REMOTE" --output "$MERGED"
-[blame]
-    ignoreRevsFile = .git-blame-ignore-revs
 
 ; override settings per machine
 [include]
