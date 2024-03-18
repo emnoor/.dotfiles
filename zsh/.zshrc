@@ -60,4 +60,6 @@ do
   fi
 done
 
+bindkey -s ^f "tmux-sessionizer\n"
+
 # zprof
