@@ -86,7 +86,7 @@ vim.opt.rtp:prepend(lazypath)
 -- [[ Configure and install plugins ]]
 require('lazy').setup {
   'tpope/vim-sleuth',  -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-surround',
+  { 'tpope/vim-surround',    dependencies = { 'tpope/vim-repeat' } },
   'tpope/vim-vinegar', -- Disable oil.nvim when using this
   'christoomey/vim-tmux-navigator',
   -- 'mbbill/undotree',
@@ -131,7 +131,7 @@ require('lazy').setup {
         section_separators = '',
       },
       sections = {
-        lualine_b = {'diagnostics'},
+        lualine_b = { 'diagnostics' },
         lualine_y = {},
       },
     },
@@ -154,24 +154,6 @@ require('lazy').setup {
     end,
   },
 
-  -- Disable vinegar.vim when using this
-  -- {
-  --   'stevearc/oil.nvim',
-  --   dependencies = { "nvim-tree/nvim-web-devicons" },
-  --   config = function()
-  --     require('oil').setup({
-  --       columns = {},
-  --       view_options = {
-  --         show_hidden = true,
-  --         is_always_hidden = function (name, bufnr)
-  --           return vim.endswith(name, "venv")
-  --         end,
-  --       },
-  --     })
-  --     vim.keymap.set("n", "-", require('oil').open, { desc = "Open parent directory" })
-  --   end,
-  -- },
-
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
@@ -182,7 +164,7 @@ require('lazy').setup {
         auto_install = true,
         highlight = { enable = true },
         indent = { enable = true },
-        incremental_selection = {
+        incremental_selection = { -- start with visual selection and then +/- will increment/decrement selections
           enable = true,
           keymaps = {
             init_selection = false,
