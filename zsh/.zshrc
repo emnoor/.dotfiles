@@ -22,6 +22,9 @@ HIST_STAMPS="yyyy-mm-dd"
 source $ZSH/oh-my-zsh.sh
 # /oh-my-zsh
 
+# direnv
+eval "$(direnv hook zsh)"
+
 # starship prompt setup
 eval "$(starship init zsh)"
 
