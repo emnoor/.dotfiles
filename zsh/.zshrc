@@ -22,12 +22,6 @@ HIST_STAMPS="yyyy-mm-dd"
 source $ZSH/oh-my-zsh.sh
 # /oh-my-zsh
 
-# direnv
-eval "$(direnv hook zsh)"
-
-# starship prompt setup
-eval "$(starship init zsh)"
-
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
@@ -43,6 +37,12 @@ path=(
     $path
 )
 export PATH
+
+# direnv
+eval "$(direnv hook zsh)"
+
+# starship prompt setup
+eval "$(starship init zsh)"
 
 export HOMEBREW_BUNDLE_FILE="$HOME/.dotfiles/Brewfile"
 
