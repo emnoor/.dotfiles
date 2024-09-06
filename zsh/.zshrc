@@ -4,6 +4,11 @@ set -o noclobber
 alias cp='cp -i'
 alias mv='mv -i'
 
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+fi
+
 # unset run-help alias to man, and enable run-help
 autoload -Uz run-help
 (( ${+aliases[run-help]} )) && unalias run-help
