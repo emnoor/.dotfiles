@@ -18,6 +18,7 @@
     unstage2 = reset HEAD --
     who = shortlog -s --
     root = rev-parse --show-toplevel
+    cleanup = "!git branch --merged | egrep -v '(\\*|master|main|prod|deploy|staging)' | xargs -n 1 -r git branch -d"
 [credential]
     helper = store
 [init]
