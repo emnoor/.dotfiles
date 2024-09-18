@@ -43,11 +43,9 @@ path=(
 )
 export PATH
 
-# direnv
 eval "$(direnv hook zsh)"
-
-# starship prompt setup
 eval "$(starship init zsh)"
+eval "$(uv generate-shell-completion zsh)"
 
 export HOMEBREW_BUNDLE_FILE="$HOME/.dotfiles/Brewfile"
 
