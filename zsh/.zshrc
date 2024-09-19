@@ -54,8 +54,6 @@ files_to_source=(
   "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh   # fzf mac
   /usr/share/doc/fzf/examples/key-bindings.zsh      # fzf ubuntu
   /usr/share/doc/fzf/examples/completion.zsh        # fzf ubuntu
-  /opt/homebrew/bin/virtualenvwrapper.sh            # virtualenvwrapper mac
-  /usr/share/virtualenvwrapper/virtualenvwrapper.sh   # virtualenvwrapper ubuntu
 )
 
 for file_to_source in $files_to_source
