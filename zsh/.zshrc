@@ -4,8 +4,7 @@ set -o noclobber
 alias cp='cp -i'
 alias mv='mv -i'
 
-if type brew &>/dev/null
-then
+if type brew &>/dev/null; then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
 
@@ -56,10 +55,8 @@ files_to_source=(
   /usr/share/doc/fzf/examples/completion.zsh        # fzf ubuntu
 )
 
-for file_to_source in $files_to_source
-do
-  if [ -f "$file_to_source" ]
-  then
+for file_to_source in $files_to_source; do
+  if [ -f "$file_to_source" ]; then
     source "$file_to_source"
   fi
 done
