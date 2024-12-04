@@ -51,6 +51,7 @@ vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank into system cl
 vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Yank current line into system clipboard" })
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set("n", "Q", "<nop>")
+vim.keymap.set("n", "<F1>", "<nop>")
 
 -- Join lines without moving cursor
 -- vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines" })
