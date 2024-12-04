@@ -2,3 +2,4 @@
 /nvim/.config/nvim/lazy-lock.json
 tmux/.tmux/plugins/*
 !tmux/.tmux/plugins/tpm
+uv/.config/uv/uv-receipt.json
