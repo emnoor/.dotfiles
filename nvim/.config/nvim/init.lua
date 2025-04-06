@@ -96,9 +96,6 @@ require('lazy').setup {
     end
   },
 
-  -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
-
   -- Hide contents in .env files
   -- { 'laytan/cloak.nvim', opts = {} },
 
