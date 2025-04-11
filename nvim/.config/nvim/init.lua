@@ -84,7 +84,7 @@ vim.opt.rtp:prepend(lazypath)
 -- [[ Configure and install plugins ]]
 require('lazy').setup {
   'tpope/vim-sleuth',  -- Detect tabstop and shiftwidth automatically
-  { 'tpope/vim-surround',    dependencies = { 'tpope/vim-repeat' } },
+  { 'tpope/vim-surround', dependencies = { 'tpope/vim-repeat' } },
   'tpope/vim-vinegar', -- Disable oil.nvim when using this
   'christoomey/vim-tmux-navigator',
   -- 'mbbill/undotree',
@@ -111,6 +111,7 @@ require('lazy').setup {
     lazy = false,
     priority = 1000,
     config = function()
+      ---@diagnostic disable-next-line: missing-fields
       require('tokyonight').setup({ style = "night" })
       vim.cmd.colorscheme 'tokyonight-night'
     end,
@@ -281,6 +282,8 @@ require('lazy').setup {
       require('mason').setup()
 
       require('mason-lspconfig').setup {
+        ensure_installed = vim.tbl_keys(servers or {}),
+        automatic_installation = false,
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
@@ -288,21 +291,19 @@ require('lazy').setup {
             require('lspconfig')[server_name].setup(server)
           end,
         },
-        ensure_installed = vim.tbl_keys(servers or {}),
       }
     end,
   },
+
   {
-    'folke/lazydev.nvim',
-    ft = 'lua',
+    "folke/lazydev.nvim",
+    ft = "lua",
     opts = {
       library = {
-        -- Load luvit types when the `vim.uv` word is found
-        { path = 'luvit-meta/library', words = { 'vim%.uv' } },
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
       },
     },
   },
-  { 'Bilal2453/luvit-meta', lazy = true },
 
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
