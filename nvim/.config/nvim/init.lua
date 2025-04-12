@@ -56,6 +56,12 @@ vim.keymap.set("n", "<F1>", "<nop>")
 -- Join lines without moving cursor
 -- vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines" })
 
+-- [[ Diagnostics ]]
+vim.diagnostic.config {
+  jump = { float = true },
+  float = { border = 'solid' },
+}
+
 -- Move current line the to center after jump to word/line
 -- vim.keymap.set("n", "<C-d>", "<C-d>zz")
 -- vim.keymap.set("n", "<C-u>", "<C-u>zz")
