@@ -145,11 +145,7 @@ require('lazy').setup {
     opts = {
       -- Document existing key chains
       spec = {
-        { '<leader>c', group = '[C]ode',     mode = { 'n', 'x' } },
-        { '<leader>d', group = '[D]ocument' },
-        { '<leader>r', group = '[R]ename' },
         { '<leader>s', group = '[S]earch' },
-        { '<leader>w', group = '[W]orkspace' },
       },
     }
   },
@@ -238,22 +234,6 @@ require('lazy').setup {
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
-          vim.keymap.set('n', 'gd', require('telescope.builtin').lsp_definitions,
-            { buffer = event.buf, desc = 'LSP: [G]oto [D]efinition' })
-          vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references,
-            { buffer = event.buf, desc = 'LSP: [G]oto [R]eferences' })
-          vim.keymap.set('n', 'gI', require('telescope.builtin').lsp_implementations,
-            { buffer = event.buf, desc = 'LSP: [G]oto [I]mplementation' })
-          vim.keymap.set('n', '<leader>D', require('telescope.builtin').lsp_type_definitions,
-            { buffer = event.buf, desc = 'LSP: Type [D]efinition' })
-          vim.keymap.set('n', '<leader>ds', require('telescope.builtin').lsp_document_symbols,
-            { buffer = event.buf, desc = 'LSP: [D]ocument [S]ymbols' })
-          vim.keymap.set('n', '<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols,
-            { buffer = event.buf, desc = 'LSP: [W]orkspace [S]ymbols' })
-          vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { buffer = event.buf, desc = 'LSP: [R]e[n]ame' })
-          vim.keymap.set({ 'n', 'x' }, '<leader>ca', vim.lsp.buf.code_action,
-            { buffer = event.buf, desc = 'LSP: [C]ode [A]ction' })
-          vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = event.buf, desc = 'LSP: [G]oto [D]eclaration' })
           vim.keymap.set('n', "<leader>f", vim.lsp.buf.format,
             { buffer = event.buf, desc = 'LSP: [F]ormat current buffer' })
         end,
