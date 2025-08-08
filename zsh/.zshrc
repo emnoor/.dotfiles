@@ -37,6 +37,7 @@ export LESS="-R --mouse --wheel-lines 3"
 path=(
     $HOME/.local/bin
     $HOME/.cargo/bin
+    /usr/local/go/bin
     $HOME/go/bin
     $path
 )
