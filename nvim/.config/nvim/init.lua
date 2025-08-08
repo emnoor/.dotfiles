@@ -81,16 +81,28 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- [[ Install `lazy.nvim` plugin manager ]]
-local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
-if not vim.uv.fs_stat(lazypath) then
-  local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
-  vim.fn.system { 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath }
-end ---@diagnostic disable-next-line: undefined-field
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out,                            "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
+end
 vim.opt.rtp:prepend(lazypath)
 
 -- [[ Configure and install plugins ]]
 require('lazy').setup {
-  'tpope/vim-sleuth',  -- Detect tabstop and shiftwidth automatically
+  -- Detect tabstop and shiftwidth automatically
+  -- 'tpope/vim-sleuth',
+  { 'NMAC427/guess-indent.nvim', opt = {} },
+
   { 'tpope/vim-surround', dependencies = { 'tpope/vim-repeat' } },
   'tpope/vim-vinegar', -- Disable oil.nvim when using this
   'christoomey/vim-tmux-navigator',
@@ -153,6 +165,8 @@ require('lazy').setup {
 
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    branch = 'master',
+    lazy = false,
     build = ':TSUpdate',
     main = 'nvim-treesitter.configs',
     opts = {
@@ -174,6 +188,7 @@ require('lazy').setup {
 
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
+    branch = '0.1.x',
     event = 'VimEnter',
     dependencies = {
       'nvim-lua/plenary.nvim',
@@ -236,6 +251,17 @@ require('lazy').setup {
         callback = function(event)
           vim.keymap.set('n', "<leader>f", vim.lsp.buf.format,
             { buffer = event.buf, desc = 'LSP: [F]ormat current buffer' })
+
+          -- The following code creates a keymap to toggle inlay hints in your
+          -- code, if the language server you are using supports them
+          --
+          -- This may be unwanted, since they displace some of your code
+          local client = vim.lsp.get_client_by_id(event.data.client_id)
+          if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
+            vim.keymap.set('n', '<leader>th', function()
+              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
+            end, { buffer = event.buf, desc = 'LSP: [T]oggle Inlay [H]ints' })
+          end
         end,
       })
 
