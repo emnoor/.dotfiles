@@ -170,7 +170,7 @@ require('lazy').setup {
     build = ':TSUpdate',
     main = 'nvim-treesitter.configs',
     opts = {
-      ensure_installed = { 'go', 'lua', 'luadoc', 'python', 'rust', 'vimdoc', 'vim', 'bash', 'diff', 'markdown', 'markdown_inline', 'query' },
+      ensure_installed = {},
       auto_install = true,
       highlight = { enable = true },
       indent = { enable = true },
@@ -294,7 +294,7 @@ require('lazy').setup {
       require('mason').setup()
 
       require('mason-lspconfig').setup {
-        ensure_installed = vim.tbl_keys(servers or {}),
+        ensure_installed = {},
         automatic_installation = false,
         handlers = {
           function(server_name)
