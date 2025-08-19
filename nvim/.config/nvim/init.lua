@@ -172,8 +172,14 @@ require('lazy').setup {
     opts = {
       ensure_installed = {},
       auto_install = true,
-      highlight = { enable = true },
-      indent = { enable = true },
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = { 'c', 'cpp' },
+      },
+      indent = {
+        enable = true,
+        disable = { 'c', 'cpp' },
+      },
       incremental_selection = { -- start with visual selection and then +/- will increment/decrement selections
         enable = true,
         keymaps = {
@@ -185,6 +191,7 @@ require('lazy').setup {
       },
     },
   },
+
 
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
