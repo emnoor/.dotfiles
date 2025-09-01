@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+set -e
+set -u
+set -o pipefail
+set -x
+
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
@@ -12,7 +17,7 @@ if [[ -z $selected ]]; then
 fi
 
 selected_name=$(basename "$selected" | tr . _)
-tmux_running=$(pgrep tmux)
+tmux_running=$(pgrep tmux || echo)
 
 if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
     tmux new-session -s $selected_name -c $selected
