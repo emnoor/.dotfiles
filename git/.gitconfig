@@ -26,6 +26,8 @@
 [core]
     autocrlf = input
     pager = less -F
+[push]
+    autoSetupRemote = true
 [merge]
     tool = meld
 [mergetool "meld"]
