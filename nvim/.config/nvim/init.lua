@@ -18,7 +18,7 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
-vim.opt.scrolloff = 8
+vim.opt.scrolloff = 2
 vim.opt.wrap = false
 
 -- vim.opt.tabstop = 4
@@ -36,8 +36,21 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
+vim.api.nvim_create_user_command('W', function() vim.cmd('write') end, {})
+
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>dq', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostic [Q]uickfix list' })
+
+vim.keymap.set('n', '<leader>q', function()
+  local windows = vim.fn.getwininfo()
+  for _, win in pairs(windows) do
+    if win["quickfix"] == 1 then
+      vim.cmd.cclose()
+      return
+    end
+  end
+  vim.cmd.copen()
+end, { desc = 'Toggle [Q]uickfix List Window' })
 
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
@@ -62,12 +75,6 @@ vim.diagnostic.config {
   jump = { float = true },
   float = { border = 'solid' },
 }
-
--- Move current line the to center after jump to word/line
--- vim.keymap.set("n", "<C-d>", "<C-d>zz")
--- vim.keymap.set("n", "<C-u>", "<C-u>zz")
--- vim.keymap.set("n", "n", "nzzzv")
--- vim.keymap.set("n", "N", "Nzzzv")
 
 -- [[ Basic Autocommands ]]
 
@@ -100,13 +107,11 @@ vim.opt.rtp:prepend(lazypath)
 -- [[ Configure and install plugins ]]
 require('lazy').setup {
   -- Detect tabstop and shiftwidth automatically
-  -- 'tpope/vim-sleuth',
-  { 'NMAC427/guess-indent.nvim', opt = {} },
+  'tpope/vim-sleuth',
 
   { 'tpope/vim-surround', dependencies = { 'tpope/vim-repeat' } },
-  'tpope/vim-vinegar', -- Disable oil.nvim when using this
+  'tpope/vim-vinegar',
   'christoomey/vim-tmux-navigator',
-  -- 'mbbill/undotree',
 
   {
     'tpope/vim-fugitive',
@@ -115,32 +120,11 @@ require('lazy').setup {
     end
   },
 
-  -- Hide contents in .env files
-  -- { 'laytan/cloak.nvim', opts = {} },
-
-  -- Highlight todo, notes, etc in comments
-  -- { 'folke/todo-comments.nvim',
-  --   event = 'VimEnter',
-  --   dependencies = { 'nvim-lua/plenary.nvim' },
-  --   opts = { signs = false },
-  -- },
-
-  {
-    'folke/tokyonight.nvim',
-    lazy = false,
-    priority = 1000,
-    config = function()
-      ---@diagnostic disable-next-line: missing-fields
-      require('tokyonight').setup({ style = "night" })
-      vim.cmd.colorscheme 'tokyonight-night'
-    end,
-  },
-
   { -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     opts = {
       options = {
-        theme = 'tokyonight',
+        theme = 'wombat',
         icons_enabled = false,
         component_separators = '|',
         section_separators = '',
@@ -150,17 +134,6 @@ require('lazy').setup {
         lualine_y = {},
       },
     },
-  },
-
-  { -- Show you pending keybinds
-    'folke/which-key.nvim',
-    event = 'VimEnter',
-    opts = {
-      -- Document existing key chains
-      spec = {
-        { '<leader>s', group = '[S]earch' },
-      },
-    }
   },
 
   { -- Highlight, edit, and navigate code
@@ -176,10 +149,7 @@ require('lazy').setup {
         enable = true,
         additional_vim_regex_highlighting = { 'c', 'cpp' },
       },
-      indent = {
-        enable = true,
-        disable = { 'c', 'cpp' },
-      },
+      indent = { enable = false },
       incremental_selection = { -- start with visual selection and then +/- will increment/decrement selections
         enable = true,
         keymaps = {
@@ -191,7 +161,6 @@ require('lazy').setup {
       },
     },
   },
-
 
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
@@ -392,18 +361,6 @@ require('lazy').setup {
       }
     end,
   },
-
-  {
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    ft = { "markdown" },
-    build = function() vim.fn["mkdp#util#install"]() end,
-  },
-
-  -- {
-  --   "ibhagwan/smartyank.nvim",
-  --   opts = {},
-  -- },
 
 }
 
