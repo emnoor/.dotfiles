@@ -61,6 +61,14 @@ vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<F1>", "<nop>")
 vim.keymap.set("i", "<C-u>", "<nop>") -- this is annoying as hell -_-
 
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
+  callback = function(event)
+    vim.keymap.set('n', "<leader>f", vim.lsp.buf.format,
+    { buffer = event.buf, desc = 'LSP: [F]ormat current buffer' })
+  end,
+})
+
 -- [[ Diagnostics ]]
 vim.diagnostic.config {
   jump = { float = true },
@@ -188,74 +196,18 @@ require('lazy').setup {
 
   -- LSP Configuration & Plugins
   {
-    'neovim/nvim-lspconfig',
+    "mason-org/mason-lspconfig.nvim",
+    opts = {},
     dependencies = {
-      'mason-org/mason.nvim',
-      'mason-org/mason-lspconfig.nvim',
-      'hrsh7th/cmp-nvim-lsp', -- Allows extra capabilities provided by nvim-cmp
-      { 'j-hui/fidget.nvim', opts = {} },
+      { "mason-org/mason.nvim", opts = {} },
+      "neovim/nvim-lspconfig",
     },
-    config = function()
-      vim.api.nvim_create_autocmd('LspAttach', {
-        group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
-        callback = function(event)
-          vim.keymap.set('n', "<leader>f", vim.lsp.buf.format,
-            { buffer = event.buf, desc = 'LSP: [F]ormat current buffer' })
-
-          -- The following code creates a keymap to toggle inlay hints in your
-          -- code, if the language server you are using supports them
-          --
-          -- This may be unwanted, since they displace some of your code
-          local client = vim.lsp.get_client_by_id(event.data.client_id)
-          if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
-            vim.keymap.set('n', '<leader>th', function()
-              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
-            end, { buffer = event.buf, desc = 'LSP: [T]oggle Inlay [H]ints' })
-          end
-        end,
-      })
-
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = vim.tbl_deep_extend("force", capabilities, require('cmp_nvim_lsp').default_capabilities())
-
-      -- Enable the following language servers
-      local servers = {
-        -- clangd = {},
-        gopls = {},
-        pyright = {},
-        rust_analyzer = {},
-        ts_ls = {},
-        lua_ls = {
-          -- cmd = {...},
-          -- filetypes { ...},
-          -- capabilities = {},
-          settings = {
-            Lua = {
-              completion = {
-                callSnippet = 'Replace',
-              },
-              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
-            },
-          },
-        },
-      }
-
-      require('mason').setup()
-
-      require('mason-lspconfig').setup {
-        ensure_installed = {},
-        automatic_installation = false,
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
-          end,
-        },
-      }
-    end,
   },
+  { -- this should load after mason-lspconfig
+    'j-hui/fidget.nvim', opts = {},
+    dependencies = 'mason-org/mason-lspconfig.nvim'
+  },
+  -- TODO: override LSP capabilities with require('cmp_nvim_lsp').default_capabilities()
 
   {
     "folke/lazydev.nvim",
