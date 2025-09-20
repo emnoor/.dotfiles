@@ -56,7 +56,6 @@ end, { desc = 'Toggle [Q]uickfix List Window' })
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
-vim.keymap.set("n", "<space><space>", "<c-^>", { desc = "Toggle to the most recent buffer" })
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selections up" })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selections down" })
 vim.keymap.set("i", "<C-c>", "<Esc>", { desc = "Exit insert mode" })
@@ -175,21 +174,13 @@ require('lazy').setup {
           return vim.fn.executable 'make' == 1
         end,
       },
-      { 'nvim-telescope/telescope-ui-select.nvim' },
       { 'nvim-tree/nvim-web-devicons' }
     },
     config = function()
-      require('telescope').setup {
-        extensions = {
-          ['ui-select'] = {
-            require('telescope.themes').get_dropdown(),
-          },
-        },
-      }
+      require('telescope').setup {}
 
       -- Enable telescope extensions, if they are installed
       pcall(require('telescope').load_extension, 'fzf')
-      pcall(require('telescope').load_extension, 'ui-select')
 
       local builtin = require 'telescope.builtin'
       vim.keymap.set('n', '<C-p>', builtin.git_files, { desc = 'Search Git Files' })
@@ -199,16 +190,7 @@ require('lazy').setup {
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
-      vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
-      vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-
-      vim.keymap.set('n', '<leader>/', function()
-        builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-          winblend = 10,
-          previewer = false,
-        })
-      end, { desc = '[/] Fuzzily search in current buffer' })
     end,
   },
 
