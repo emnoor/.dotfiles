@@ -52,22 +52,14 @@ vim.keymap.set('n', '<leader>q', function()
   vim.cmd.copen()
 end, { desc = 'Toggle [Q]uickfix List Window' })
 
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selections up" })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selections down" })
-vim.keymap.set("i", "<C-c>", "<Esc>", { desc = "Exit insert mode" })
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank into system clipboard" })
 vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Yank current line into system clipboard" })
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<F1>", "<nop>")
 vim.keymap.set("i", "<C-u>", "<nop>") -- this is annoying as hell -_-
-
--- Join lines without moving cursor
--- vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines" })
 
 -- [[ Diagnostics ]]
 vim.diagnostic.config {
