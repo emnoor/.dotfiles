@@ -135,30 +135,12 @@ require('lazy').setup {
     },
   },
 
-  { -- Highlight, edit, and navigate code
+  {
     'nvim-treesitter/nvim-treesitter',
     branch = 'master',
     lazy = false,
     build = ':TSUpdate',
     main = 'nvim-treesitter.configs',
-    opts = {
-      ensure_installed = {},
-      auto_install = true,
-      highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = { 'c', 'cpp' },
-      },
-      indent = { enable = false },
-      incremental_selection = { -- start with visual selection and then +/- will increment/decrement selections
-        enable = true,
-        keymaps = {
-          init_selection = false,
-          scope_incremental = false,
-          node_incremental = "+",
-          node_decremental = "-",
-        },
-      },
-    },
   },
 
   { -- Fuzzy Finder (files, lsp, etc)
