@@ -19,6 +19,7 @@ vim.opt.splitbelow = true
 vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 vim.opt.scrolloff = 2
+vim.opt.sidescrolloff = 2
 vim.opt.wrap = false
 
 -- vim.opt.tabstop = 4
@@ -130,7 +131,6 @@ require('lazy').setup {
       },
       sections = {
         lualine_b = { 'diagnostics' },
-        lualine_y = {},
       },
     },
   },
@@ -187,7 +187,7 @@ require('lazy').setup {
   },
   { -- this should load after mason-lspconfig
     'j-hui/fidget.nvim', opts = {},
-    dependencies = 'mason-org/mason-lspconfig.nvim'
+    dependencies = { 'mason-org/mason-lspconfig.nvim' },
   },
   -- TODO: override LSP capabilities with require('cmp_nvim_lsp').default_capabilities()
 
