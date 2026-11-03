@@ -87,6 +87,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+vim.g.diffs = {
+  integrations = {
+    fugitive = true,
+  }
+}
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -113,6 +119,7 @@ require('lazy').setup {
   'tpope/vim-vinegar',
   'christoomey/vim-tmux-navigator',
 
+  'https://forge.barrettruth.com/barrettruth/diffs.nvim',
   {
     'tpope/vim-fugitive',
     config = function()
@@ -135,11 +142,13 @@ require('lazy').setup {
     },
   },
 
-  {
-    'nvim-treesitter/nvim-treesitter',
-    lazy = false,
-    build = ':TSUpdate',
-  },
+  -- {
+  --   "romus204/tree-sitter-manager.nvim",
+  --   dependencies = {}, -- tree-sitter CLI must be installed system-wide
+  --   config = function()
+  --     require("tree-sitter-manager").setup()
+  --   end,
+  -- },
 
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
