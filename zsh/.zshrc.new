@@ -85,7 +85,15 @@ bindkey '^N' down-line-or-beginning-search
 
 alias cp='cp -i'
 alias mv='mv -i'
-alias ls="ls --color=auto --classify=auto --hyperlink=auto"
+if [[ $OSTYPE == darwin* ]]; then
+  if (( $+commands[gls] )); then
+    alias ls='gls --color=auto --classify=auto --hyperlink=auto'
+  else
+    alias ls='ls -GF'
+  fi
+else
+  alias ls='ls --color=auto --classify=auto --hyperlink=auto'
+fi
 alias ll="ls -Alh"
 alias diff="diff --color=auto"
 
