@@ -1,4 +1,5 @@
-set -o noclobber
+setopt noclobber
+setopt AUTO_PUSHD PUSHD_IGNORE_DUPS PUSHD_SILENT PUSHD_MINUS
 
 if type brew &>/dev/null; then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
@@ -17,12 +18,14 @@ setopt INC_APPEND_HISTORY   # Write commands instantly instead of waiting for sh
 setopt HIST_IGNORE_DUPS
 setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_SPACE
+setopt HIST_VERIFY
+setopt HIST_EXPIRE_DUPS_FIRST
 
 # ==================================================
 # Completions
 # ==================================================
 
-zstyle ':completion:*' completer _complete _ignored _approximate
+zstyle ':completion:*' completer _complete _ignored
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}' 'r:|[._-]=* r:|=*'
@@ -62,13 +65,56 @@ zstyle :prompt:pure:prompt:success color green
 
 prompt pure
 
+# Pure shows user@host for SSH and root shells. Show the user locally too.
+prompt_pure_precustom() {
+  [[ -n $psvar[13] ]] || psvar[22]=${(%):-%n}
+}
+
+# Report the current directory to terminals that understand OSC 7.
+_osc7_encode_path() {
+  emulate -L zsh
+  local LC_ALL=C input_path=$1 char hex
+  local -i i
+  REPLY=
+  for (( i = 1; i <= ${#input_path}; ++i )); do
+    char=$input_path[i]
+    if [[ $char == [A-Za-z0-9/._~-] ]]; then
+      REPLY+=$char
+    else
+      printf -v hex '%02X' "$(( #char ))"
+      REPLY+="%$hex"
+    fi
+  done
+}
+
+_report_cwd() {
+  [[ -t 1 ]] || return
+  case $TERM in
+    xterm*|rxvt*|konsole*|screen*|tmux*) ;;
+    *) [[ $TERM_PROGRAM == iTerm.app ]] || return ;;
+  esac
+
+  local host=$HOST
+  [[ $TERM == konsole* || -n $KONSOLE_PROFILE_NAME || -n $KONSOLE_DBUS_SESSION ]] && host=
+  _osc7_encode_path "$PWD"
+  printf '\e]7;file://%s%s\e\\' "$host" "$REPLY"
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd _report_cwd
+
 # ==================================================
 # Keybinds
 # ==================================================
 
 bindkey -e
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^X^E' edit-command-line
 bindkey '^[[1;5D' backward-word
 bindkey '^[[1;5C' forward-word
+bindkey "^[[H"      beginning-of-line
+bindkey "^[[F"      end-of-line
+bindkey "^[[3~"     delete-char
 
 # Bind Up/Down arrows to search backward for commands starting with the current input
 autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
