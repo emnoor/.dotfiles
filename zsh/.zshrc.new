@@ -1,0 +1,137 @@
+set -o noclobber
+
+if type brew &>/dev/null; then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+fi
+
+# ==================================================
+# History
+# ==================================================
+
+HISTFILE=~/.zsh_history
+HISTSIZE=1000000
+SAVEHIST=1000000
+setopt EXTENDED_HISTORY     # Save execution time and duration
+setopt INC_APPEND_HISTORY   # Write commands instantly instead of waiting for shell exit
+# setopt HIST_IGNORE_ALL_DUPS # Erase old duplicate records if a new one is run
+setopt HIST_IGNORE_DUPS
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_SPACE
+
+# ==================================================
+# Completions
+# ==================================================
+
+zstyle ':completion:*' completer _complete _ignored _approximate
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}' 'r:|[._-]=* r:|=*'
+zstyle ':completion:*' menu select=1
+zstyle :compinstall filename "$HOME/.zshrc"
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+# Add clean formatting and headers to those groups
+zstyle ':completion:*:descriptions' format '%F{blue}-- %d --%f'
+zstyle ':completion:*:messages' format '%F{purple}%d%f'
+zstyle ':completion:*:warnings' format '%F{red}No matches for: %d%f'
+
+# ==================================================
+# Prompt
+# ==================================================
+
+# PROMPT="%~ $ "
+
+fpath+=($HOME/.zsh/pure)
+autoload -U promptinit; promptinit
+
+# Prevents Pure from checking whether the current Git remote has been updated.
+PURE_GIT_PULL=0
+
+# Detailed dirty indicators differentiate between unstaged (*), staged (+),
+# and untracked (?) changes instead of showing a single *.
+zstyle :prompt:pure:git:dirty detailed yes
+
+# Path separator dimming makes / characters in the path visually dimmer to help distinguish path components.
+zstyle :prompt:pure:path:separator dim yes
+
+# Make success prompt green
+zstyle :prompt:pure:prompt:success color green
+
+prompt pure
+
+# ==================================================
+# Keybinds
+# ==================================================
+
+bindkey -e
+bindkey '^[[1;5D' backward-word
+bindkey '^[[1;5C' forward-word
+
+# Bind Up/Down arrows to search backward for commands starting with the current input
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey '^[[A' up-line-or-beginning-search
+bindkey '^[[B' down-line-or-beginning-search
+bindkey '^P' up-line-or-beginning-search
+bindkey '^N' down-line-or-beginning-search
+
+# ==================================================
+# Aliases
+# ==================================================
+
+alias cp='cp -i'
+alias mv='mv -i'
+alias ls="ls --color=auto --classify=auto --hyperlink=auto"
+alias ll="ls -Alh"
+alias diff="diff --color=auto"
+
+# ==================================================
+
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='nvim'
+fi
+export VISUAL="$EDITOR"
+
+# See https://wiki.archlinux.org/title/KDE_Wallet#Using_the_KDE_Wallet_to_store_ssh_key_passphrases
+if [[ -x /usr/bin/ksshaskpass ]]; then
+  export SSH_ASKPASS=/usr/bin/ksshaskpass
+  export SSH_ASKPASS_REQUIRE=prefer
+  export GIT_ASKPASS=/usr/bin/ksshaskpass
+fi
+
+export npm_config_prefix="$HOME/.local"
+
+# unset run-help alias to man, and enable run-help
+autoload -Uz run-help
+(( ${+aliases[run-help]} )) && unalias run-help
+alias help=run-help
+
+export LESS="-R --mouse --wheel-lines 3"
+
+path=(
+    $HOME/.local/bin
+    $HOME/.cargo/bin
+    /usr/local/go/bin
+    $HOME/go/bin
+    $path
+)
+export PATH
+
+if [ -f "$HOME/.zshrc.user" ]; then
+  source "$file_to_source"
+fi
+
+eval "$(direnv hook zsh)"
+eval "$(uv generate-shell-completion zsh)"
+
+if type fzf &>/dev/null; then
+  source <(fzf --zsh)
+fi
+
+# export HOMEBREW_BUNDLE_FILE="$HOME/.dotfiles/Brewfile"
