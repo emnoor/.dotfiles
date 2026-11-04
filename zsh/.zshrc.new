@@ -3,6 +3,9 @@ setopt AUTO_PUSHD PUSHD_IGNORE_DUPS PUSHD_SILENT PUSHD_MINUS
 
 if type brew &>/dev/null; then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+  if [[ $OSTYPE == darwin* && $USER != enam ]]; then
+    alias brew='sudo -H -u enam brew'
+  fi
 fi
 
 # ==================================================
