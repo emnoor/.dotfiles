@@ -31,6 +31,10 @@ vim.opt.wrap = false
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
+vim.cmd.colorscheme "catppuccin"
+
+vim.o.winborder = "rounded"
+
 --[[ Keymaps ]]
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
@@ -131,7 +135,7 @@ require('lazy').setup {
     'nvim-lualine/lualine.nvim',
     opts = {
       options = {
-        theme = 'wombat',
+        theme = 'auto',
         icons_enabled = false,
         component_separators = '|',
         section_separators = '',
@@ -149,6 +153,13 @@ require('lazy').setup {
   --     require("tree-sitter-manager").setup()
   --   end,
   -- },
+
+  {
+    'nvim-treesitter/nvim-treesitter-context',
+    opts = {
+      enable = false,
+    }
+  },
 
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',

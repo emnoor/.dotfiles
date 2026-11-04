@@ -1,3 +1,4 @@
 tmux/.tmux/plugins/*
 !tmux/.tmux/plugins/tpm
 uv/.config/uv/uv-receipt.json
+nvim/nvim.log
